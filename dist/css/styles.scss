@@ -11,27 +11,6 @@ $font-family1: 'ChosunIlboMyungjo';
     font-weight: normal;
     font-display: swap;
 }
-
-// 1280 → 1000으로 줄이기 위한 전역 비율
-$scale: 0.78125;
-
-// px 단위 자동 축소 함수
-@function scale($value) {
-  @if type-of($value) == 'number' and unit($value) == 'px' {
-    @return $value * $scale;
-  }
-  @else if type-of($value) == 'list' {
-    $result: ();
-    @each $v in $value {
-      $result: append($result, scale($v));
-    }
-    @return $result;
-  }
-  @else {
-    @return $value;
-  }
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -53,8 +32,6 @@ body {
     font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     line-height: 1;
     color: #000;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
 }
 
 table{

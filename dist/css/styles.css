@@ -29,8 +29,6 @@ body {
   font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
   line-height: 1;
   color: #000;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
 }
 
 table {
@@ -1280,7 +1278,7 @@ div.color10 {
   .a4-page {
     transform-origin: top left;
     /* 1280x1810을 794x1123에 맞게 축소 */
-    transform: 0.6203125;
+    transform: scale(0.6203125);
     width: 1280px;
     height: 1810px;
     page-break-after: always;
