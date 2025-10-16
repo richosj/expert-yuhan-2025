@@ -42,12 +42,11 @@ table {
   width: 1000px;
   height: 1414px;
   background: white;
-  padding: 31.25px 46.875px;
+  padding: 31px 46px;
   overflow: hidden;
 }
 
 .content {
-  width: 892.1875px;
   height: 100%;
   overflow: hidden;
   margin: 0 auto;
@@ -57,6 +56,7 @@ table {
 #cover {
   padding: 0;
   background: url("../img/cover.png") no-repeat center center;
+  background-size: cover;
 }
 #cover .position {
   position: absolute;
@@ -93,6 +93,7 @@ table {
 #table-of-contents {
   padding: 0;
   background: url("../img/index.png") no-repeat center center;
+  background-size: cover;
 }
 #table-of-contents .content {
   width: 100%;
@@ -137,6 +138,7 @@ table {
 
 #divider {
   background: url("../img/divider.png") no-repeat center center;
+  background-size: cover;
 }
 #divider .divider-title {
   position: absolute;
@@ -198,8 +200,8 @@ table {
 
 .nav-item {
   padding: 0 16.40625px;
-  height: 25.78125px;
-  line-height: 25.78125px;
+  height: 25px;
+  line-height: 25px;
 }
 .nav-item + .nav-item {
   border-left: 0.78125px solid rgba(20, 35, 65, 0.6);
@@ -219,7 +221,7 @@ table {
   margin-top: 58.59375px;
   font-size: 31.25px;
   font-weight: 600;
-  margin-bottom: 66.40625px;
+  margin-bottom: 50.78125px;
 }
 
 .section-subtitle {
@@ -298,7 +300,7 @@ table {
 
 .summary-title-bar {
   background: rgb(20, 35, 65);
-  height: 62.5px;
+  height: 39.0625px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -313,7 +315,7 @@ table {
   font-weight: 500;
   font-size: 15.625px;
   line-height: 21.875px;
-  height: 145.3125px;
+  height: 98.4375px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -615,8 +617,8 @@ div.color10 {
 
 .radar-chart-container {
   text-align: center;
-  height: 328.125px;
-  width: 328.125px;
+  height: 420px;
+  width: 420px;
   margin: 0 auto;
   margin-bottom: 31.25px;
 }
@@ -655,10 +657,10 @@ div.color10 {
 }
 
 .diagnosis-data-table.sm th {
-  height: 46.875px;
+  height: 31.25px;
 }
 .diagnosis-data-table.sm td {
-  height: 31.25px;
+  height: 26.5625px;
 }
 .diagnosis-data-table.sm td:first-child {
   border-left: 0.78125px solid #EBEBEB;
@@ -765,9 +767,9 @@ div.color10 {
 }
 
 .competency-chart {
-  padding: 26.5625px 21.09375px;
+  padding: 18.75px 15.625px;
   border-radius: 3.90625px;
-  margin-bottom: 23.4375px;
+  margin-bottom: 15.625px;
 }
 
 .chart-header {
@@ -825,6 +827,10 @@ div.color10 {
   width: 35.9375px;
   height: 35.9375px;
   background: url("../img/symbols.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .scale-labels {
@@ -855,7 +861,8 @@ div.color10 {
 }
 .scale-bar::before, .scale-bar::after {
   content: "";
-  background: url("../img/cir.png");
+  background: url("../img/cir.png") no-repeat 50% 50%;
+  background-size: cover;
   width: 8.59375px;
   height: 8.59375px;
   display: block;
@@ -897,10 +904,10 @@ div.color10 {
 }
 
 .matrix-chart .chart-title {
-  font-size: 18.75px;
+  font-size: 15.625px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 15.625px;
+  margin-bottom: 7.8125px;
 }
 
 .scatter-plot {
@@ -908,6 +915,7 @@ div.color10 {
   width: 385.9375px;
   height: 394.53125px;
   background: url("../img/chart1.png") no-repeat center center;
+  background-size: cover;
 }
 .scatter-plot.v2 {
   background-image: url("../img/chart2.png");
@@ -949,6 +957,10 @@ div.color10 {
   border-collapse: collapse;
   font-size: 9.375px;
   border: 0.78125px solid #EBEBEB;
+}
+.comparison-table .average-row td {
+  background: rgb(235, 235, 235);
+  font-weight: bold;
 }
 
 .comparison-table th,
@@ -1069,6 +1081,7 @@ div.color10 {
   gap: 4.6875px;
   width: 93.75px;
   height: 93.75px;
+  flex-shrink: 0;
 }
 .feedback-header.bd1 {
   border: 1.5625px solid rgb(25, 51, 90);
@@ -1151,6 +1164,10 @@ div.color10 {
   margin-top: 3.90625px;
   line-height: 21.875px;
 }
+.note-text.v2 {
+  margin-bottom: 10px;
+  text-align: right;
+}
 
 .education-program-table th {
   background: #142341;
@@ -1186,45 +1203,15 @@ div.color10 {
 }
 
 .detailed-diagnosis-table {
-  font-size: 9.375px;
+  font-size: 14px;
   border-collapse: collapse;
   width: 100%;
 }
 .detailed-diagnosis-table th, .detailed-diagnosis-table td {
   border: 0.78125px solid #ccc;
-  padding: 6.25px;
+  padding: 3.90625px;
   text-align: center;
-}
-.detailed-diagnosis-table th:nth-child(1), .detailed-diagnosis-table td:nth-child(1) {
-  width: 62.5px;
-}
-.detailed-diagnosis-table th:nth-child(2), .detailed-diagnosis-table td:nth-child(2) {
-  width: 78.125px;
-}
-.detailed-diagnosis-table th:nth-child(3), .detailed-diagnosis-table td:nth-child(3) {
-  width: 93.75px;
-}
-.detailed-diagnosis-table th:nth-child(4), .detailed-diagnosis-table td:nth-child(4) {
-  text-align: left;
-  padding-left: 11.71875px;
-}
-.detailed-diagnosis-table th:nth-child(5), .detailed-diagnosis-table td:nth-child(5) {
-  width: 62.5px;
-}
-.detailed-diagnosis-table th:nth-child(6), .detailed-diagnosis-table td:nth-child(6) {
-  width: 78.125px;
-}
-.detailed-diagnosis-table th:nth-child(7), .detailed-diagnosis-table td:nth-child(7) {
-  width: 62.5px;
-}
-.detailed-diagnosis-table th:nth-child(8), .detailed-diagnosis-table td:nth-child(8) {
-  width: 78.125px;
-}
-.detailed-diagnosis-table th:nth-child(9), .detailed-diagnosis-table td:nth-child(9) {
-  width: 62.5px;
-}
-.detailed-diagnosis-table th:nth-child(10), .detailed-diagnosis-table td:nth-child(10) {
-  width: 62.5px;
+  line-height: 1.34;
 }
 .detailed-diagnosis-table .header-bg {
   background-color: #142341;
@@ -1232,6 +1219,10 @@ div.color10 {
 }
 .detailed-diagnosis-table .category-bg {
   background-color: #e3f2fd;
+}
+.detailed-diagnosis-table .vt {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
 }
 .detailed-diagnosis-table .average-row {
   background-color: #bbdefb;

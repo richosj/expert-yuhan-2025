@@ -65,17 +65,16 @@ table{
 
 // A4 용지 컨테이너
 .a4-page {
-    width: scale(1280px);
-    height: scale(1810px);
+    width: 1000px;
+    height: 1414px;
     background: white;
-    padding: scale(40px) scale(60px);
+    padding: 31px 46px;
     overflow: hidden;
     
 }
 
 // 컨텐츠 영역
 .content {
-    width: scale(1142px);
     height: 100%;
     overflow: hidden;
     margin: 0 auto;
@@ -85,6 +84,7 @@ table{
 #cover{
     padding: 0;
     background: url('../img/cover.png') no-repeat center center;
+    background-size: cover;
     .position{
         position: absolute;
         left: 0;
@@ -125,6 +125,7 @@ table{
 #table-of-contents{
     padding: 0;
     background: url('../img/index.png') no-repeat center center;
+    background-size: cover;
     .content{
         width: 100%;
     }
@@ -173,6 +174,7 @@ table{
 
 #divider{
     background: url('../img/divider.png') no-repeat center center;
+    background-size: cover;
     
     .divider-title{
         position: absolute;
@@ -238,8 +240,8 @@ table{
 
 .nav-item {
     padding: 0 scale(21px);
-    height: scale(33px);
-    line-height: scale(33px);
+    height: 25px;
+    line-height: 25px;
     +.nav-item{
         border-left: scale(1px) solid rgba(20, 35, 65, 0.6);
     }
@@ -263,7 +265,7 @@ table{
     margin-top: scale(75px);
     font-size: scale(40px);
     font-weight: 600;
-    margin-bottom: scale(85px);
+    margin-bottom: scale(65px);
 }
 
 .section-subtitle {
@@ -362,7 +364,7 @@ table{
 
 .summary-title-bar {
     background: rgba(20, 35, 65, 1);
-    height: scale(80px);
+    height: scale(50px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -377,7 +379,7 @@ table{
     font-weight: 500;
     font-size: scale(20px);
     line-height: scale(28px);
-    height: scale(186px);
+    height: scale(126px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -710,8 +712,8 @@ div{
 
 .radar-chart-container {
     text-align: center;
-    height: scale(420px);
-    width: scale(420px);
+    height: 420px;
+    width: 420px;
     margin: 0 auto;
     margin-bottom: scale(40px);
 }
@@ -751,10 +753,10 @@ div{
 
 .diagnosis-data-table.sm{
     th{
-        height: scale(60px);
+        height: scale(40px);
     }
     td{
-        height: scale(40px);
+        height: scale(34px);
         &:first-child{
             border-left: scale(1px) solid #EBEBEB;
         }
@@ -875,10 +877,10 @@ div{
 
 // Page 7 - 나의위치알아보기
 .competency-chart {
-    padding: scale(34px) scale(27px);
+    padding: scale(24px) scale(20px);
     border-radius: scale(5px);
     //height: scale(176px);
-    margin-bottom: scale(30px);;
+    margin-bottom: scale(20px);;
 }
 
 .chart-header {
@@ -935,6 +937,10 @@ div{
         width: scale(46px);
         height: scale(46px);
         background: url('../img/symbols.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
 
@@ -966,7 +972,8 @@ div{
     &::before,
     &::after{
         content: '';
-        background: url('../img/cir.png');
+        background: url('../img/cir.png') no-repeat 50% 50%;
+        background-size: cover;
         width: scale(11px);
         height: scale(11px);
         display: block;
@@ -1011,10 +1018,10 @@ div{
 
 .matrix-chart {
     .chart-title{
-        font-size: scale(24px);
+        font-size: scale(20px);
         font-weight: 700;
         text-align: center;
-        margin-bottom: scale(20px);
+        margin-bottom: scale(10px);
     }
 }
 
@@ -1023,6 +1030,7 @@ div{
     width: scale(494px);
     height: scale(505px);
     background: url("../img/chart1.png") no-repeat center center;
+    background-size: cover;
     &.v2{
         background-image: url("../img/chart2.png");
     }
@@ -1064,6 +1072,12 @@ div{
     border-collapse: collapse;
     font-size: scale(12px);
     border: scale(1px) solid #EBEBEB;
+    .average-row{
+        td{
+            background: rgba(235, 235, 235, 1);
+            font-weight: bold;
+        }
+    }
 }
 
 .comparison-table th,
@@ -1085,6 +1099,7 @@ div{
 
 .comparison-table .category-bg {
     background-color: #e3f2fd;
+    
 }
 
 .comparison-table .average-row {
@@ -1189,6 +1204,7 @@ div{
     gap: scale(6px);
     width: scale(120px);
     height: scale(120px);
+    flex-shrink: 0;
     &.bd1{
         border: scale(2px) solid rgba(25, 51, 90, 1)
     }
@@ -1276,6 +1292,10 @@ div{
     color: #525252;
     margin-top: scale(5px);
     line-height: scale(28px);
+    &.v2{
+        margin-bottom: 10px;
+        text-align: right;
+    }
 }
 
 .education-program-table {
@@ -1318,27 +1338,16 @@ div{
 
 // Page 11 specific styles
 .detailed-diagnosis-table {
-    font-size: scale(12px);
+    font-size: 14px;
     border-collapse: collapse;
     width: 100%;
     
     th, td {
         border: scale(1px) solid #ccc;
-        padding: scale(8px);
+        padding: scale(5px);
         text-align: center;
-    }
-    
-    th:nth-child(1), td:nth-child(1) { width: scale(80px); } // 구분
-    th:nth-child(2), td:nth-child(2) { width: scale(100px); } // 역량
-    th:nth-child(3), td:nth-child(3) { width: scale(120px); } // 하위역량
-    th:nth-child(4), td:nth-child(4) { text-align: left; padding-left: scale(15px); } // 문항
-    th:nth-child(5), td:nth-child(5) { width: scale(80px); } // 본인진단
-    th:nth-child(6), td:nth-child(6) { width: scale(100px); } // 본인평균
-    th:nth-child(7), td:nth-child(7) { width: scale(80px); } // 구성원진단
-    th:nth-child(8), td:nth-child(8) { width: scale(100px); } // 구성원평균
-    th:nth-child(9), td:nth-child(9) { width: scale(80px); } // 본인GAP
-    th:nth-child(10), td:nth-child(10) { width: scale(80px); } // 구성원GAP
-    
+        line-height: 1.34;
+    }    
     // 헤더 배경
     .header-bg {
         background-color: #142341;
@@ -1348,6 +1357,10 @@ div{
     // 카테고리 배경 (연한 파란색)
     .category-bg {
         background-color: #e3f2fd;
+    }
+    .vt{
+        writing-mode: vertical-rl;
+        text-orientation: upright;
     }
     
     // 평균 행 스타일 (중간 파란색)
@@ -1408,11 +1421,7 @@ div{
     }
   
     .a4-page {
-      transform-origin: top left;
-      /* 1280x1810을 794x1123에 맞게 축소 */
-      transform: scale(calc(794 / 1280));
-      width: scale(1280px);
-      height: scale(1810px);
+      
       page-break-after: always;
     }
   }

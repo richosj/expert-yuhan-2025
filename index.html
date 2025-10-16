@@ -6,8 +6,10 @@
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta http-equiv="Content-Style-Type" content="text/css">
 	<title>A4 인쇄 문서</title>
-	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+	<script src="./js/chart.js"></script>
+	<script src="./js/loader.js"></script>
+
+
 	<link
 		href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100;200;300;400;500;600;700;800;900&display=swap"
 		rel="stylesheet">
@@ -372,34 +374,10 @@
 				</table>
 			</section>
 
-			<!-- 2) '나의 위치 알아보기' 결과 분류 기준 -->
-			<section class="section-guide">
-				<h3 class="section-subtitle">2) '나의 위치 알아보기' 결과 분류 기준 <span class="page-info">(15 Page)</span></h3>
-				<table class="guide-table classification-table">
-					<thead>
-						<tr>
-							<th>상위1~10%</th>
-							<th>상위11~25%</th>
-							<th>상위26~50%</th>
-							<th>상위51~75%</th>
-							<th>상위70~100%</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>S</td>
-							<td>A</td>
-							<td>A</td>
-							<td>A</td>
-							<td>A</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
 
 			<!-- 3) 본인-구성원진단 비교 매트릭스 구분 -->
 			<section class="section-guide">
-				<h3 class="section-subtitle">3) 본인-구성원진단 비교 매트릭스 구분 <span class="page-info">(15 Page)</span></h3>
+				<h3 class="section-subtitle">2) 본인-구성원진단 비교 매트릭스 구분 <span class="page-info">(16 Page)</span></h3>
 				<table class="guide-table matrix-table">
 					<thead>
 						<tr>
@@ -422,7 +400,7 @@
 
 			<!-- 4) 우선 개발 추천 역량(하위역량 기준) -->
 			<section class="section-guide">
-				<h3 class="section-subtitle">4) 우선 개발 추천 역량(하위역량 기준) <span class="page-info">(15 Page)</span></h3>
+				<h3 class="section-subtitle">3) 우선 개발 추천 역량(하위역량 기준)</h3>
 				<table class="guide-table priority-table">
 					<thead>
 						<tr>
@@ -507,7 +485,7 @@
 
 			<!-- 레이더 차트 -->
 			<div class="radar-chart-container">
-				420x420 차트자리 텍스트 삭제
+				<canvas id="myRadarChart"></canvas>
 			</div>
 
 			<!-- 데이터 테이블 -->
@@ -585,13 +563,6 @@
 				</table>
 			</div>
 
-			<!-- 하단 요약 -->
-			<div class="bottom-summary-box">
-				<div class="summary-title-bar">요약</div>
-				<p class="summary-content-text">구성원진단 결과 가장 높게 나타난 역량은 '성과 관리력', 가장 낮게 나타난 역량은 '신뢰관계 구축' 입니다. <br>본인진단과
-					구성원진단의 GAP이
-					존재합니다. 진단 세부결과를 확인하면서 그 이유에 대해 생각해보고, <br>인식의 차이를 줄이기 위해 노력하시기 바랍니다.</p>
-			</div>
 		</div>
 	</div>
 
@@ -625,8 +596,9 @@
 			</section>
 
 			<!-- 차트 -->
-			<div class="chart-container">
-				차트자리
+			<div class="chart-container" style="margin-top:-20px">
+				<div id="chart_top" style="width: 100%; height: 290px;"></div>
+				<div id="chart_bottom" style="width: 100%; height: 290px;margin-top: -10px;"></div>
 			</div>
 
 			<!-- 데이터 테이블 -->
@@ -750,13 +722,164 @@
 				</table>
 			</div>
 
-			<!-- 하단 요약 -->
-			<div class="bottom-summary-box">
-				<div class="summary-title-bar">요약</div>
-				<p class="summary-content-text">구성원진단 결과 가장 높게 나타난 역량은 '성과 관리력', 가장 낮게 나타난 역량은 '신뢰관계 구축' 입니다.
-					본인진단과 구성원진단의 GAP이 <br>
-					존재합니다. 진단 세부결과를 확인하면서 그 이유에 대해 생각해보고, 인식의 차이를 줄이기 위해 노력하시기 바랍니다.</p>
+		</div>
+	</div>
+
+	<div class="a4-page">
+		<div class="content">
+			<!-- 헤더 -->
+			<header class="report-header">
+				<div class="header-left">
+					<h1>리더십 다면진단 결과보고서 | 부서(팀)장</h1>
+				</div>
+				<nav class="header-nav">
+					<span class="nav-item">Ⅰ. 진단소개</span>
+					<span class="nav-item active">Ⅱ. 분석결과</span>
+					<span class="nav-item">Ⅲ. 종합결과</span>
+				</nav>
+			</header>
+
+			<!-- 메인 타이틀 -->
+			<h2 class="main-title">2. 진단 세부결과</h2>
+
+			<!-- 1) 본인진단 결과 -->
+			<section class="section-detail">
+				<h3 class="section-subtitle">1) 본인진단 결과</h3>
+				<div class="summary-text">
+
+					본인진단 결과 가장 높은 점수로 나타난 역량은 ‘윤리경영 정착’ 이며, 가장 낮은 점수로 나타난 역량은 ‘신뢰관계 구축입니다. <br>
+					본인진단 응답 결과를 본인(부서(팀)장)진단평균와 비교했을 때, 상대적으로 높게 나타난 역량은 ‘윤리경영 정착’ 이며, 상대적으로 낮게 나타난 역량은 ‘신뢰관계 구축’ 입니다.
+
+				</div>
+			</section>
+
+			<!-- 차트 -->
+			<div class="chart-container" style="margin-top:-20px">
+				<div id="chart_top2" style="width: 100%; height: 290px;"></div>
+				<div id="chart_bottom2" style="width: 100%; height: 290px;margin-top: -10px;"></div>
 			</div>
+
+			<!-- 데이터 테이블 -->
+			<div class="data-table-container">
+				<table class="diagnosis-data-table sm">
+					<thead>
+						<tr>
+							<th>역량</th>
+							<th>하위역량</th>
+							<th>본인진단 (A)</th>
+							<th>본인(부서(팀)장) 진단평균(B)</th>
+							<th>본인진단GAP (A-B)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 성과 관리력 -->
+						<tr>
+							<td rowspan="3" class="">성과 관리력</td>
+							<td>도전적 성과 목표 설정</td>
+							<td>4.47</td>
+							<td>3.63</td>
+							<td>0.84</td>
+						</tr>
+						<tr>
+							<td>팀 실행력 강화</td>
+							<td>4.36</td>
+							<td>3.71</td>
+							<td>0.65</td>
+						</tr>
+						<tr class="average-row">
+							<td>평균</td>
+							<td>4.41</td>
+							<td>3.67</td>
+							<td>0.74</td>
+						</tr>
+
+						<!-- 신뢰관계 구축 -->
+						<tr>
+							<td rowspan="3" class="">신뢰관계 구축</td>
+							<td>팀에 대한 책임감</td>
+							<td>2.53</td>
+							<td>3.58</td>
+							<td>-1.05</td>
+						</tr>
+						<tr>
+							<td>자기관리 실천</td>
+							<td>2.50</td>
+							<td>3.64</td>
+							<td>-1.15</td>
+						</tr>
+						<tr class="average-row">
+							<td>평균</td>
+							<td>2.51</td>
+							<td>3.61</td>
+							<td>-1.10</td>
+						</tr>
+
+						<!-- 윤리경영 정착 -->
+						<tr>
+							<td rowspan="3" class="">윤리경영 정착</td>
+							<td>규정·절차 준수 강조</td>
+							<td>4.70</td>
+							<td>3.83</td>
+							<td>0.87</td>
+						</tr>
+						<tr>
+							<td>투명한 의사결정</td>
+							<td>4.69</td>
+							<td>3.94</td>
+							<td>0.75</td>
+						</tr>
+						<tr class="average-row">
+							<td>평균</td>
+							<td>4.69</td>
+							<td>3.89</td>
+							<td>0.81</td>
+						</tr>
+
+						<!-- 팀원 육성 -->
+						<tr>
+							<td rowspan="3" class="">팀원 육성</td>
+							<td>업무몰입 지원</td>
+							<td>3.22</td>
+							<td>4.01</td>
+							<td>-0.79</td>
+						</tr>
+						<tr>
+							<td>성장 동기 부여</td>
+							<td>3.43</td>
+							<td>3.87</td>
+							<td>-0.45</td>
+						</tr>
+						<tr class="average-row">
+							<td>평균</td>
+							<td>3.32</td>
+							<td>3.94</td>
+							<td>-0.62</td>
+						</tr>
+
+						<!-- 조직연계 강화 -->
+						<tr>
+							<td rowspan="3" class="">조직연계 강화</td>
+							<td>협력적 관계 구축</td>
+							<td>3.49</td>
+							<td>3.49</td>
+							<td>0.00</td>
+						</tr>
+						<tr>
+							<td>이해관계 설득 및 조율</td>
+							<td>3.74</td>
+							<td>3.72</td>
+							<td>0.02</td>
+						</tr>
+						<tr class="average-row">
+							<td>평균</td>
+							<td>3.62</td>
+							<td>3.61</td>
+							<td>0.01</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
 		</div>
 	</div>
 
@@ -794,14 +917,6 @@
 					</ul>
 				</div>
 			</section>
-
-			<!-- 하단 요약 -->
-			<div class="bottom-summary-box">
-				<div class="summary-title-bar">요약</div>
-				<p class="summary-content-text">
-					PPT에는 없는데 디자인에는 있네요..
-				</p>
-			</div>
 		</div>
 	</div>
 
@@ -838,14 +953,6 @@
 					</ul>
 				</div>
 			</section>
-
-			<!-- 하단 요약 -->
-			<div class="bottom-summary-box">
-				<div class="summary-title-bar">요약</div>
-				<p class="summary-content-text">
-					PPT에는 없는데 디자인에는 있네요..
-				</p>
-			</div>
 		</div>
 	</div>
 
@@ -883,13 +990,6 @@
 				</div>
 			</section>
 
-			<!-- 하단 요약 -->
-			<div class="bottom-summary-box">
-				<div class="summary-title-bar">요약</div>
-				<p class="summary-content-text">
-					PPT에는 없는데 디자인에는 있네요..
-				</p>
-			</div>
 		</div>
 	</div>
 
@@ -936,17 +1036,15 @@
 			<div class="section-summary">
 				<p class="summary-text">아래의 내용은 전체 응답 결과를 기준으로, 본인의 결과가 어느 수준에 해당하는지 상대적 위치를 보여줍니다. <br>본인의 위치와 결과를
 					참고하여, 강점 역량은 강화하고 약점 역량은 보완하는 데 활용해 보시기 바랍니다.</p>
-				<p class="note-text">* 결과 분류 기준은 6P ‘해석 가이드‘ 참고 (S : 상위 1~10%, A : 상위 11~25%, B : 상위 26~50%, C+ : 상위
-					51~75%, C : 상위 76~100%)
-				</p>
 			</div>
 
+			<p class="note-text v2">51~75%, C : 상위 76~100%)</p>
 			<!-- 역량별 차트 섹션 -->
 			<div class="competency-charts">
 				<!-- 전체역량 -->
 				<div class="competency-chart" style="background: rgba(227, 227, 227, 1);">
 					<div class="chart-header">
-						<div class="competency-title">‘전체역량’진단 결과: B</div>
+						<div class="competency-title">전체역량</div>
 						<div class="diagnosis-result">
 							<div class="score-item">구성원 진단: <b>3.80</b></div>
 							<div class="score-item">구성원(부서(팀)장) 진단평균: <b>3.73</b></div>
@@ -977,13 +1075,12 @@
 				</div>
 
 				<!-- 성과 관리력 -->
-				<div class="competency-chart" style="background: rgba(25, 51, 90, 0.2);">
+				<div class="competency-chart" style="background: rgba(227, 227, 227, 1);">
 					<div class="chart-header">
 						<div class="competency-title">성과 관리력</div>
 						<div class="diagnosis-result">
 							<div class="score-item">구성원 진단: <b>3.80</b></div>
 							<div class="score-item">구성원(부서(팀)장) 진단평균: <b>3.73</b></div>
-							<span class="result-label">S</span>
 						</div>
 					</div>
 					<div class="chart-body">
@@ -1011,13 +1108,12 @@
 				</div>
 
 				<!-- 신뢰관계 구축 -->
-				<div class="competency-chart" style="background: rgba(105, 122, 152, 0.2);">
+				<div class="competency-chart" style="background: rgba(227, 227, 227, 1);">
 					<div class="chart-header">
 						<div class="competency-title">신뢰관계 구축</div>
 						<div class="diagnosis-result">
 							<div class="score-item">구성원 진단: <b>3.80</b></div>
 							<div class="score-item">구성원(부서(팀)장) 진단평균: <b>3.73</b></div>
-							<span class="result-label">C</span>
 						</div>
 					</div>
 					<div class="chart-body">
@@ -1045,13 +1141,12 @@
 				</div>
 
 				<!-- 윤리경영 정착 -->
-				<div class="competency-chart" style="background: rgba(70, 117, 192, 0.2);">
+				<div class="competency-chart" style="background: rgba(227, 227, 227, 1);">
 					<div class="chart-header">
 						<div class="competency-title">윤리경영 정착</div>
 						<div class="diagnosis-result">
 							<div class="score-item">구성원 진단: <b>3.80</b></div>
 							<div class="score-item">구성원(부서(팀)장) 진단평균: <b>3.73</b></div>
-							<span class="result-label">C+</span>
 						</div>
 					</div>
 					<div class="chart-body">
@@ -1079,13 +1174,12 @@
 				</div>
 
 				<!-- 팀원 육성 -->
-				<div class="competency-chart" style="background: rgba(136, 191, 214, 0.2);">
+				<div class="competency-chart" style="background: rgba(227, 227, 227, 1);">
 					<div class="chart-header">
 						<div class="competency-title">팀원 육성</div>
 						<div class="diagnosis-result">
 							<div class="score-item">구성원 진단: <b>4.69</b></div>
 							<div class="score-item">구성원(부서(팀)장) 진단평균: <b>3.62</b></div>
-							<span class="result-label">S</span>
 						</div>
 					</div>
 					<div class="chart-body">
@@ -1113,13 +1207,12 @@
 				</div>
 
 				<!-- 조직연계 강화 -->
-				<div class="competency-chart" style="background: rgba(126, 184, 219, 0.2);">
+				<div class="competency-chart" style="background: rgba(227, 227, 227, 1);">
 					<div class="chart-header">
 						<div class="competency-title">조직연계 강화</div>
 						<div class="diagnosis-result">
 							<div class="score-item">구성원 진단: <b>3.80</b></div>
 							<div class="score-item">구성원(부서(팀)장) 진단평균: <b>3.73</b></div>
-							<span class="result-label">B</span>
 						</div>
 					</div>
 					<div class="chart-body">
@@ -1208,31 +1301,31 @@
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td>성과 관리력</td>
+									<td class="category-bg">성과 관리력</td>
 									<td>4.41</td>
 									<td>4.70</td>
 								</tr>
 								<tr>
 									<td>2</td>
-									<td>신뢰관계 구축</td>
+									<td class="category-bg">신뢰관계 구축</td>
 									<td>2.51</td>
 									<td>2.32</td>
 								</tr>
 								<tr>
 									<td>3</td>
-									<td>윤리경영 정착</td>
+									<td class="category-bg">윤리경영 정착</td>
 									<td>4.69</td>
 									<td>3.25</td>
 								</tr>
 								<tr>
 									<td>4</td>
-									<td>팀원 육성</td>
+									<td class="category-bg">팀원 육성</td>
 									<td>3.32</td>
 									<td>4.69</td>
 								</tr>
 								<tr>
 									<td>5</td>
-									<td>조직연계 강화</td>
+									<td class="category-bg">조직연계 강화</td>
 									<td>3.62</td>
 									<td>4.04</td>
 								</tr>
@@ -1670,22 +1763,22 @@
 					<tr class="header-bg">
 						<th>구분</th>
 						<th>역량</th>
-						<th>하위역량</th>
+						<th>하위<br>역량</th>
 						<th>문항</th>
-						<th>본인진단</th>
-						<th>본인(부서(팀)장) 진단평균</th>
-						<th>구성원진단</th>
-						<th>구성원(부서(팀)장) 진단평균</th>
-						<th>본인진단GAP</th>
-						<th>구성원진단GAP</th>
+						<th>본인<br>진단</th>
+						<th>본인(부서(팀)장)<br>진단평균</th>
+						<th>구성원<br>진단</th>
+						<th>구성원(부서(팀)장)<br>진단평균</th>
+						<th>본인<br>진단GAP</th>
+						<th>구성원<br>진단GAP</th>
 					</tr>
 				</thead>
 				<tbody>
 					<!-- 성과관리력 -->
 					<tr>
-						<td rowspan="11" class="category-bg">도전정신</td>
-						<td rowspan="11" class="category-bg">성과관리력</td>
-						<td rowspan="5" class="category-bg">도전적성과목표설정</td>
+						<td rowspan="11" class="category-bg vt">도전정신</td>
+						<td rowspan="11" class="category-bg">성과<br>관리력</td>
+						<td rowspan="5" class="category-bg">도전적<br>성과목표설정</td>
 						<td>팀 역량을 정확히 파악해 과업 목표를 설정한다.</td>
 						<td>4.50</td>
 						<td>3.63</td>
@@ -1788,9 +1881,9 @@
 
 					<!-- 신뢰관계구축 -->
 					<tr>
-						<td rowspan="11" class="category-bg">신뢰성</td>
-						<td rowspan="11" class="category-bg">신뢰관계구축</td>
-						<td rowspan="5" class="category-bg">팀에대한책임감</td>
+						<td rowspan="11" class="category-bg vt">신뢰성</td>
+						<td rowspan="11" class="category-bg">신뢰관계<br>구축</td>
+						<td rowspan="5" class="category-bg">팀에<br>대한책임감</td>
 						<td>일관된 행동과 말로 신뢰를 형성한다.</td>
 						<td>2.43</td>
 						<td>3.58</td>
@@ -1836,7 +1929,7 @@
 						<td>-0.10</td>
 					</tr>
 					<tr>
-						<td rowspan="5" class="category-bg">자기관리실천</td>
+						<td rowspan="5" class="category-bg">자기관리<br>실천</td>
 						<td>팀원들이 혼란을 느끼지 않도록 일관적인 태도와 원칙을 유지한다.</td>
 						<td>2.46</td>
 						<td>3.64</td>
@@ -1890,8 +1983,359 @@
 						<td>-1.10</td>
 						<td>-0.19</td>
 					</tr>
+
+				<tr>
+					<td rowspan="11" class="category-bg vt">정도지향</td>
+					<td rowspan="11" class="category-bg">윤리<br>경영<br>정착</td>
+					<td rowspan="5" class="category-bg">규정·<br>절차<br>준수<br>강조</td>
+						<td>윤리기준(부패방지    및 컴플라이언스    방침 등)에    따라 업무 절차를 명확하게 전달한다.</td>
+						<td>4.60</td>
+						<td>3.83</td>
+						<td>3.15</td>
+						<td>3.99</td>
+						<td>0.77</td>
+						<td>-1.45</td>
+					  </tr>
+					  <tr>
+						<td>윤리와    청렴을 강조하며 주도적으로 실천한다.</td>
+						<td>4.78</td>
+						<td>3.83</td>
+						<td>3.09</td>
+						<td>3.99</td>
+						<td>0.95</td>
+						<td>-1.69</td>
+					  </tr>
+					  <tr>
+						<td>윤리기준(부패방지    및 컴플라이언스    방침 등)에    따라 업무가 이뤄지도록 관리한다.</td>
+						<td>4.78</td>
+						<td>3.83</td>
+						<td>3.03</td>
+						<td>3.99</td>
+						<td>0.95</td>
+						<td>-1.75</td>
+					  </tr>
+					  <tr>
+						<td>윤리기준(부패방지    및 컴플라이언스    방침 등)    위반에    대해 방관하지 않고 해결에 나선다.</td>
+						<td>4.65</td>
+						<td>3.83</td>
+						<td>2.93</td>
+						<td>3.99</td>
+						<td>0.82</td>
+						<td>-1.72</td>
+					  </tr>
+				  <tr class="average-row">
+					<td>평균</td>
+					<td>4.70</td>
+					<td>3.83</td>
+					<td>3.05</td>
+					<td>3.99</td>
+					<td>0.87</td>
+					<td>-1.65</td>
+				  </tr>
+				  <tr>
+					<td rowspan="5" class="category-bg">투명한<br>의사결정</td>
+						<td>정책과    결정 기준을 구성원에게 명확히 설명한다.</td>
+						<td>4.67</td>
+						<td>3.94</td>
+						<td>3.31</td>
+						<td>3.45</td>
+						<td>0.73</td>
+						<td>-1.36</td>
+					  </tr>
+					  <tr>
+						<td>조직의    핵심가치와 사회적 책임에 따라 의사결정한다.</td>
+						<td>4.76</td>
+						<td>3.94</td>
+						<td>3.44</td>
+						<td>3.45</td>
+						<td>0.82</td>
+						<td>-1.32</td>
+					  </tr>
+					  <tr>
+						<td>상황에    따라 기준을 바꾸지 않고 공정하게 판단, 평가한다.</td>
+						<td>4.68</td>
+						<td>3.94</td>
+						<td>3.54</td>
+						<td>3.45</td>
+						<td>0.74</td>
+						<td>-1.14</td>
+					  </tr>
+					  <tr>
+						<td>직무상    권한을 사적 이익이나 관계에 남용하지 않는다.</td>
+						<td>4.63</td>
+						<td>3.94</td>
+						<td>3.50</td>
+						<td>3.45</td>
+						<td>0.69</td>
+						<td>-1.13</td>
+					  </tr>
+				  <tr class="average-row">
+					<td>평균</td>
+					<td>4.69</td>
+					<td>3.94</td>
+					<td>3.45</td>
+					<td>3.45</td>
+					<td>0.75</td>
+					<td>-1.24</td>
+				  </tr>
+				  <tr class="average-row">
+					<td colspan="2">평균</td>
+						<td>4.69</td>
+						<td>3.89</td>
+						<td>3.25</td>
+						<td>3.72</td>
+						<td>0.81</td>
+						<td>-1.45</td>
+					  </tr>
 				</tbody>
 			</table>
+
+		</div>
+	</div>
+
+	<div class="a4-page">
+		<div class="content">
+			<!-- 헤더 -->
+			<header class="report-header">
+				<div class="header-left">
+					<h1>리더십 다면진단 결과보고서 | 부서(팀)장</h1>
+				</div>
+				<nav class="header-nav">
+					<span class="nav-item">Ⅰ. 진단소개</span>
+					<span class="nav-item">Ⅱ. 분석결과</span>
+					<span class="nav-item active">Ⅲ. 종합결과</span>
+				</nav>
+			</header>
+
+			<!-- 메인 타이틀 -->
+			<h2 class="main-title">2. 종합세부진단결과</h2>
+
+			<!-- 상세 진단 결과 테이블 -->
+			<table class="detailed-diagnosis-table">
+				<thead>
+					<tr class="header-bg">
+						<th>구분</th>
+						<th>역량</th>
+						<th>하위<br>역량</th>
+						<th>문항</th>
+						<th>본인<br>진단</th>
+						<th>본인(부서(팀)장)<br>진단평균</th>
+						<th>구성원<br>진단</th>
+						<th>구성원(부서(팀)장)<br>진단평균</th>
+						<th>본인<br>진단GAP</th>
+						<th>구성원<br>진단GAP</th>
+					</tr>
+				</thead>
+			<tbody>
+				<tr>
+					<td rowspan="11" class="category-bg vt">성장지원</td>
+					<td rowspan="11" class="category-bg">팀원<br>육성</td>
+					<td rowspan="5" class="category-bg">업무<br>몰입<br>지원</td>
+						<td>각    팀원의 성향과 특성을 잘 파악하고 있다.</td>
+						<td>3.07</td>
+						<td>4.01</td>
+						<td>4.60</td>
+						<td>3.70</td>
+						<td>-0.94</td>
+						<td>1.53</td>
+					</tr>
+					<tr>
+						<td>구성원이    책임감 있게 일할 수 있도록 기대 수준을 구체적으로 전달한다.</td>
+						<td>3.25</td>
+						<td>4.01</td>
+						<td>4.53</td>
+						<td>3.70</td>
+						<td>-0.76</td>
+						<td>1.28</td>
+					</tr>
+					<tr>
+						<td>업무    몰입을 방해하는 불필요한 요소를 제거한다.</td>
+						<td>3.29</td>
+						<td>4.01</td>
+						<td>4.70</td>
+						<td>3.70</td>
+						<td>-0.72</td>
+						<td>1.41</td>
+					</tr>
+					<tr>
+						<td>몰입을    저해하는 요인을 팀과 함께 점검하고 개선 방안을 논의한다.</td>
+						<td>3.26</td>
+						<td>4.01</td>
+						<td>4.59</td>
+						<td>3.70</td>
+						<td>-0.75</td>
+						<td>1.33</td>
+					</tr>
+				<tr class="average-row">
+					<td>평균</td>
+					<td>3.22</td>
+					<td>4.01</td>
+					<td>4.61</td>
+					<td>3.70</td>
+					<td>-0.79</td>
+					<td>1.39</td>
+				</tr>
+				<tr>
+					<td rowspan="5" class="category-bg">성장<br>동기<br>부여</td>
+						<td>리더로서    지속적으로 역량을 개발하여 구성원에게 성장의 모범을 보인다.</td>
+						<td>3.36</td>
+						<td>3.87</td>
+						<td>4.87</td>
+						<td>3.53</td>
+						<td>-0.51</td>
+						<td>1.51</td>
+					</tr>
+					<tr>
+						<td>팀원    각자가 강점을 발휘할 수 있도록 성장 방향을 제시한다.</td>
+						<td>3.31</td>
+						<td>3.87</td>
+						<td>4.71</td>
+						<td>3.53</td>
+						<td>-0.56</td>
+						<td>1.40</td>
+					</tr>
+					<tr>
+						<td>새로운    도전에 긍정적인 피드백으로 격려한다.</td>
+						<td>3.53</td>
+						<td>3.87</td>
+						<td>4.87</td>
+						<td>3.53</td>
+						<td>-0.34</td>
+						<td>1.34</td>
+					</tr>
+					<tr>
+						<td>구성원의    노력 과정을 파악하고 인정한다.</td>
+						<td>3.50</td>
+						<td>3.87</td>
+						<td>4.65</td>
+						<td>3.53</td>
+						<td>-0.37</td>
+						<td>1.15</td>
+					</tr>
+				<tr class="average-row">
+					<td>평균</td>
+					<td>3.43</td>
+					<td>3.87</td>
+					<td>4.78</td>
+					<td>3.53</td>
+					<td>-0.45</td>
+					<td>1.35</td>
+				</tr>
+				<tr class="average-row">
+					<td colspan="2">평균</td>
+						<td>3.32</td>
+						<td>3.94</td>
+						<td>4.69</td>
+						<td>3.62</td>
+						<td>-0.62</td>
+						<td>1.37</td>
+					</tr>
+				<tr>
+					<td rowspan="11" class="category-bg vt">소통</td>
+					<td rowspan="11" class="category-bg">조직<br>연계<br>강화</td>
+					<td rowspan="5" class="category-bg">협력적<br>관계<br>구축</td>
+						<td>팀내/팀간    협업의 중요성을 강조하며 소통 문화를 조성한다.</td>
+						<td>3.50</td>
+						<td>3.49</td>
+						<td>4.00</td>
+						<td>3.68</td>
+						<td>0.01</td>
+						<td>0.50</td>
+					</tr>
+					<tr>
+						<td>진솔한    대화와 공감으로 긍정적인 관계를 형성한다.</td>
+						<td>3.38</td>
+						<td>3.49</td>
+						<td>4.09</td>
+						<td>3.68</td>
+						<td>-0.11</td>
+						<td>0.71</td>
+					</tr>
+					<tr>
+						<td>팀내/팀간    협업이 원활히 이루어지도록 긍정적인 분위기를 조성한다.</td>
+						<td>3.53</td>
+						<td>3.49</td>
+						<td>4.07</td>
+						<td>3.68</td>
+						<td>0.04</td>
+						<td>0.54</td>
+					</tr>
+					<tr>
+						<td>팀내/팀간    갈등 상황 발생 시 경청을 바탕으로 조율한다.</td>
+						<td>3.56</td>
+						<td>3.49</td>
+						<td>4.12</td>
+						<td>3.68</td>
+						<td>0.07</td>
+						<td>0.56</td>
+					</tr>
+				<tr class="average-row">
+					<td>평균</td>
+					<td>3.49</td>
+					<td>3.49</td>
+					<td>4.07</td>
+					<td>3.68</td>
+					<td>0.00</td>
+					<td>0.58</td>
+				</tr>
+				<tr>
+					<td rowspan="5" class="category-bg">이해<br>관계<br>설득 및<br>조율</td>
+						<td>다양한    이해관계자의 입장과 의도를 사전에 파악한다.</td>
+						<td>3.74</td>
+						<td>3.74</td>
+						<td>4.09</td>
+						<td>3.76</td>
+						<td>0.02</td>
+						<td>0.35</td>
+					</tr>
+					<tr>
+						<td>설득    및 조율 경험을 팀원들과 공유한다.</td>
+						<td>3.72</td>
+						<td>3.74</td>
+						<td>3.98</td>
+						<td>3.76</td>
+						<td>0.00</td>
+						<td>0.26</td>
+					</tr>
+					<tr>
+						<td>명확하고    효과적인 소통으로 내·외부 이해관계자를 설득하고 조율한다.</td>
+						<td>3.69</td>
+						<td>3.74</td>
+						<td>4.09</td>
+						<td>3.76</td>
+						<td>-0.03</td>
+						<td>0.40</td>
+					</tr>
+					<tr>
+						<td>의견    충돌 시 객관적 근거를 바탕으로 합의를 이끈다.</td>
+						<td>3.80</td>
+						<td>3.74</td>
+						<td>3.86</td>
+						<td>3.76</td>
+						<td>0.08</td>
+						<td>0.06</td>
+					</tr>
+				<tr class="average-row">
+					<td>평균</td>
+					<td>3.74</td>
+					<td>3.74</td>
+					<td>4.01</td>
+					<td>3.76</td>
+					<td>0.02</td>
+					<td>0.27</td>
+				</tr>
+				<tr class="average-row">
+					<td colspan="2">평균</td>
+						<td>3.62</td>
+						<td>3.62</td>
+						<td>4.04</td>
+						<td>3.72</td>
+						<td>0.01</td>
+						<td>0.42</td>
+					</tr>
+				</tbody>
+			</table>
+			
 		</div>
 	</div>
 
@@ -1901,6 +2345,9 @@
 			<div class="logos"><img src="./img/logo.png" alt=""></div>
 		</div>
 	</div>
+	<script src="js/chart1.js"></script>
+	<script src="js/chart2.js"></script>
+	<script src="js/chart3.js"></script>
 </body>
 
 </html>
