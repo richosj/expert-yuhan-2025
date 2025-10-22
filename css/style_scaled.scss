@@ -48,7 +48,7 @@ ol{
 
 
 body {
-    background: white;
+    background: #dadada;
     padding: 0;
     font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     line-height: 1;
@@ -65,12 +65,12 @@ table{
 
 // A4 용지 컨테이너
 .a4-page {
+    margin: 0 auto;
     width: 1000px;
     height: 1414px;
     background: white;
     padding: 31px 46px;
     overflow: hidden;
-    
 }
 
 // 컨텐츠 영역
@@ -158,7 +158,7 @@ table{
         margin-top: scale(46px);
         li{
             display: flex;
-            gap: scale(24px);
+            gap: scale(14px);
             line-height: scale(35px);
             font-size: scale(30px);
             color: rgba(0, 0, 0, 1);
@@ -224,13 +224,13 @@ table{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: scale(35px);
+    height: 43px;
     border-bottom: scale(0.5px) solid rgba(20, 35, 65, 0.6);
     border-top: scale(1.5px) solid rgba(20, 35, 65, 1)
 }
 
 .header-left h1 {
-    font-size: scale(15px);
+    font-size: scale(17px);
     font-weight: 500;
 }
 
@@ -240,8 +240,9 @@ table{
 
 .nav-item {
     padding: 0 scale(21px);
-    height: 25px;
-    line-height: 25px;
+    height: 41px;
+    line-height: 41px;
+    font-size: scale(17px);
     +.nav-item{
         border-left: scale(1px) solid rgba(20, 35, 65, 0.6);
     }
@@ -391,19 +392,36 @@ table{
 
 // Page 1 - 진단소개
 .section-1-1 {
-    margin-bottom: scale(100px);
+    margin-bottom: scale(50px);
     .text-content {
-        p {
-            font-size: scale(20px);
-            line-height: scale(28px);
-
-        }
+        font-size: scale(22px);
+        line-height: scale(30px);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: scale(20px) scale(30px);
     }
 }
 
 .section-1-2 {
 
 }  
+.a4-page{
+    position: relative;
+}
+.footer-num{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #eee;
+    height: scale(43px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: scale(17px);
+    font-weight: 500;
+    color: rgba(20, 35, 65, 1);
+    
+}
 
 .model-header{
     background: rgba(49, 49, 49, 0.1);
@@ -413,7 +431,7 @@ table{
         display: flex;
         align-items: center;
         font-weight: 500;
-        font-size: scale(20px);
+        font-size: scale(24px);
         &:nth-child(1){
             padding-left: scale(162px);
         }
@@ -548,7 +566,7 @@ div{
     display: flex;
     padding-bottom: scale(20px);
     font-weight: 500;
-    font-size: scale(20px);
+    font-size: scale(24px);
     padding-top: scale(60px);
     .col-left{
         text-align: center;

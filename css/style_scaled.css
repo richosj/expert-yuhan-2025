@@ -24,7 +24,7 @@ ol {
   tmp: expression(setPng24(this));
 } /*스크립트 선언 후 사용*/
 body {
-  background: white;
+  background: #dadada;
   padding: 0;
   font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
   line-height: 1;
@@ -39,6 +39,7 @@ table {
 }
 
 .a4-page {
+  margin: 0 auto;
   width: 1000px;
   height: 1414px;
   background: white;
@@ -124,7 +125,7 @@ table {
 }
 .menu-wrap ul li {
   display: flex;
-  gap: 18.75px;
+  gap: 10.9375px;
   line-height: 27.34375px;
   font-size: 23.4375px;
   color: rgb(0, 0, 0);
@@ -184,13 +185,13 @@ table {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 27.34375px;
+  height: 43px;
   border-bottom: 0.390625px solid rgba(20, 35, 65, 0.6);
   border-top: 1.171875px solid rgb(20, 35, 65);
 }
 
 .header-left h1 {
-  font-size: 11.71875px;
+  font-size: 13.28125px;
   font-weight: 500;
 }
 
@@ -200,8 +201,9 @@ table {
 
 .nav-item {
   padding: 0 16.40625px;
-  height: 25px;
-  line-height: 25px;
+  height: 41px;
+  line-height: 41px;
+  font-size: 13.28125px;
 }
 .nav-item + .nav-item {
   border-left: 0.78125px solid rgba(20, 35, 65, 0.6);
@@ -322,11 +324,32 @@ table {
 }
 
 .section-1-1 {
-  margin-bottom: 78.125px;
+  margin-bottom: 39.0625px;
 }
-.section-1-1 .text-content p {
-  font-size: 15.625px;
-  line-height: 21.875px;
+.section-1-1 .text-content {
+  font-size: 17.1875px;
+  line-height: 23.4375px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 15.625px 23.4375px;
+}
+
+.a4-page {
+  position: relative;
+}
+
+.footer-num {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #eee;
+  height: 33.59375px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13.28125px;
+  font-weight: 500;
+  color: rgb(20, 35, 65);
 }
 
 .model-header {
@@ -338,7 +361,7 @@ table {
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 15.625px;
+  font-size: 18.75px;
 }
 .model-header span:nth-child(1) {
   padding-left: 126.5625px;
@@ -461,7 +484,7 @@ div.color10 {
   display: flex;
   padding-bottom: 15.625px;
   font-weight: 500;
-  font-size: 15.625px;
+  font-size: 18.75px;
   padding-top: 46.875px;
 }
 .table-header-2 .col-left {
