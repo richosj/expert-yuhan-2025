@@ -14,7 +14,7 @@ new Chart(ctx, {
         pointBackgroundColor: '#3b7ddd'
       },
       {
-        label: '본인(부서/팀장)진단평균',
+        label: '본인(부서(팀)장)진단평균',
         data: [4.5, 3.8, 4.2, 3.5, 3.9],
         borderColor: '#f2c94c',
         backgroundColor: 'rgba(242, 201, 76, 0.2)',
